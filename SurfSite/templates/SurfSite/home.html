@@ -1,0 +1,67 @@
+{% extends "SurfSite/base.html" %}
+{% block content %}
+
+<style>
+        #map{
+            width:100%;
+            height: 450px;
+        }
+
+</style>
+
+
+<body>
+<div class="map-container">
+    <h2>My Map</h2>
+    <div id="map"></div>
+</div>
+</body>
+
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script>
+       function initMap() {
+  const llangetnithBeach = { lat: 51.593326, lng: -4.295183 };
+  const swansea = { lat: 51.621441, lng: -3.943646 };
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 10,
+    center: swansea,
+  });
+
+  const contentString =
+    '<div id="content">' +
+    '<div id="siteNotice">' +
+    "</div>" +
+    '<h2 id="firstHeading" class="firstHeading">Llangenith beach</h2>' +
+    '<div id="bodyContent">' +
+    "<p><b>Llangenith beach is one of the more popular and consistent beach breaks along the Swansea gower. Long mellow waves are to be expected at both high and low tide.</b>,</p>" +
+    '<p>Llangenith page: <a href="{% url 'llangenith' %}">' +
+    "https://llangenith-page</a> " +
+    "</div>" +
+    "</div>";
+
+  const infowindow = new google.maps.InfoWindow({
+    content: contentString,
+  });
+
+  const marker = new google.maps.Marker({
+    position: llangetnithBeach,
+    map,
+    title: "Llangenith",
+  });
+
+  marker.addListener("click", () => {
+    infowindow.open(map, marker);
+  });
+}
+
+
+</script>
+<script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNP8xkWVP5MajuwkUxI0f9soIZLMKl39Y
+      &callback=initMap&libraries=&v=weekly"
+        defer
+></script>
+
+
+{% endblock content %}
