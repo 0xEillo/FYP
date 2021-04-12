@@ -21,8 +21,13 @@
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <script>
        function initMap() {
+
   const llangetnithBeach = { lat: 51.593326, lng: -4.295183 };
+  const caswellBeach = { lat: 51.569866, lng: -4.031236 };
+  const langlandBeach = { lat: 51.567499, lng: -4.011467 };
+
   const swansea = { lat: 51.621441, lng: -3.943646 };
+
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 10,
     center: swansea,
@@ -40,6 +45,30 @@
     "</div>" +
     "</div>";
 
+   const caswellString =
+    '<div id="content">' +
+    '<div id="siteNotice">' +
+    "</div>" +
+    '<h2 id="firstHeading" class="firstHeading">Caswell beach</h2>' +
+    '<div id="bodyContent">' +
+    "<p><b>Caswell beach is one of the more popular and consistent beach breaks along the Swansea gower. Long mellow waves are to be expected at both high and low tide.</b>,</p>" +
+    '<p>Caswell page: <a href="{% url 'caswell' %}">' +
+    "https://caswell-page</a> " +
+    "</div>" +
+    "</div>";
+
+    const langlandString =
+    '<div id="content">' +
+    '<div id="siteNotice">' +
+    "</div>" +
+    '<h2 id="firstHeading" class="firstHeading">Langland beach</h2>' +
+    '<div id="bodyContent">' +
+    "<p><b>Langland beach is one of the more popular and consistent beach breaks along the Swansea gower. Long mellow waves are to be expected at both high and low tide.</b>,</p>" +
+    '<p>Langland page: <a href="{% url 'langland' %}">' +
+    "https://langland-page</a> " +
+    "</div>" +
+    "</div>";
+
   const infowindow = new google.maps.InfoWindow({
     content: contentString,
   });
@@ -53,13 +82,41 @@
   marker.addListener("click", () => {
     infowindow.open(map, marker);
   });
+
+  const caswellWindow = new google.maps.InfoWindow({
+    content: caswellString,
+  });
+
+  const marker2 = new google.maps.Marker({
+    position: caswellBeach,
+    map,
+    title: "Caswell",
+  });
+
+  marker2.addListener("click", () => {
+    caswellWindow.open(map, marker2);
+  });
+
+  const langlandWindow = new google.maps.InfoWindow({
+    content: langlandString,
+  });
+
+  const marker3 = new google.maps.Marker({
+    position: langlandBeach,
+    map,
+    title: "Langland",
+  });
+
+  marker3.addListener("click", () => {
+    langlandWindow.open(map, marker3);
+  });
 }
 
 
 </script>
 <script
-        src="https://maps.googleapis.com/maps/api/js?key=""
-      &callback=initMap&libraries=&v=weekly"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNP8xkWVP5MajuwkUxI0f9soIZLMKl39Y
+&callback=initMap&libraries=&v=weekly"
         defer
 ></script>
 

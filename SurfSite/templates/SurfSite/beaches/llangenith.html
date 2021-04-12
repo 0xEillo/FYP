@@ -1,22 +1,35 @@
 {% extends "SurfSite/base.html" %}
 {% load crispy_forms_tags %}
-{% block content %}
+{% block newpost %}
+    <a class="nav-item nav-link" href="{% url 'llangenith-post-create' %}">New Post</a>
+{% endblock newpost %}
 
+{% block content %}
 <h1 class="mb-3">Llangenith beach page</h1>
 
   {% for post in posts %}
+  {% if post.location == "llangenith" %}
 <article class="media content-section">
     <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
     <div class="media-body">
         <div class="article-metadata">
-            <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+            <a class="post-author mr-2 " href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+            <small class="text-muted">{{ post.location }}</small>
             <small class="text-muted">{{ post.date_posted }}</small>
         </div>
-        <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+        <h4><a class="article-title" href="{% url 'llangenith-post-detail' post.id %}">{{ post.title }}</a></h4>
+        {% if post.video != null%}
+        <div>
+            <video width="500" height="350" autoplay muted loop >
+            <source src="{{ post.video.url }}" type="video/mp4">
+            </video>
+        </div>
+        {% endif %}
         <p class="article-content">{{ post.content }}</p>
     </div>
 </article>
-    {% endfor %}
+  {% endif %}
+  {% endfor %}
 {% if is_paginated %}
     {% if page_obj.has_previous %}
         <a class="btn btn-outline-info mb-4" href="?page=1">First</a>

@@ -1,7 +1,6 @@
 body {
   background: #fafafa;
   color: #333333;
-  border-style: solid;
   margin-top: 5rem;
 }
 
@@ -33,8 +32,6 @@ ul {
   margin: auto;
   background: #ffffff;
   padding: 10px 20px;
-  border: 1px solid #dddddd;
-  border-radius: 3px;
   margin-bottom: 20px;
 }
 
@@ -90,4 +87,9 @@ a.article-title:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.post-author{
+  text: bold;
+  color: black;
 }

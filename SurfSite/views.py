@@ -7,12 +7,27 @@ from django.contrib.auth.models import User
 def home(request):
     return render(request, 'Surfsite/home.html')
 
-class PostListView(ListView):
+class LlangenithListView(ListView):
     model = Post
     template_name = 'SurfSite/beaches/llangenith.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
     paginate_by = 10
+
+class CaswellListView(ListView):
+    model = Post
+    template_name = 'SurfSite/beaches/caswell.html'
+    context_object_name = 'posts'
+    ordering = ['-date_posted']
+    paginate_by = 10
+
+class LanglandListView(ListView):
+    model = Post
+    template_name = 'SurfSite/beaches/langland.html'
+    context_object_name = 'posts'
+    ordering = ['-date_posted']
+    paginate_by = 10
+
 
 class UserPostListView(ListView):
     model = Post
@@ -30,7 +45,7 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content']
+    fields = ['title', 'location', 'content', 'video']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -59,9 +74,3 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin ,DeleteView):
         if self.request.user == post.author:
             return True
         return False
-
-def llangenith(request):
-    context = {
-        'posts': Post.objects.all()
-    }
-    return render(request, 'SurfSite/beaches/llangenith.html', context)
