@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 #SECRET_KEY = "sdjonqm70inzcc8-r!qh%$8%a9iz!h=l$64ky)5l-1akn)a5h&"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 
 ALLOWED_HOSTS = ['fypsurfsite.herokuapp.com']
 
