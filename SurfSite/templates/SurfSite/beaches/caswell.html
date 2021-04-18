@@ -1,0 +1,54 @@
+{% extends "SurfSite/base.html" %}
+{% load crispy_forms_tags %}
+{% block newpost %}
+    <a class="nav-item nav-link" href="{% url 'caswell-post-create' %}">New Post</a>
+{% endblock newpost %}
+
+{% block content %}
+<h1 class="mb-3">Caswell beach page</h1>
+
+  {% for post in posts %}
+  {% if post.location == "caswell" %}
+<article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="post-author mr-2 " href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+            <small class="text-muted">{{ post.location }}</small>
+            <small class="text-muted">{{ post.date_posted }}</small>
+        </div>
+        <h4><a class="article-title" href="{% url 'caswell-post-detail' post.id %}">{{ post.title }}</a></h4>
+        {% if post.video != null%}
+        <div>
+            <video width="500" height="350" autoplay muted loop >
+            <source src="{{ post.video.url }}" type="video/mp4">
+            </video>
+        </div>
+        {% endif %}
+        <p class="article-content">{{ post.content }}</p>
+    </div>
+</article>
+  {% endif %}
+    {% endfor %}
+{% if is_paginated %}
+    {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">First</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and  num < page_obj.number|add:'3' %}
+            <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+
+{% endif %}
+
+{% endblock content %}
