@@ -1,1 +1,1 @@
-web: gunicorn SurfSite.wsgi
+web: gunicorn FYP.wsgi
