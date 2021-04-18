@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 
 def home(request):
-    return render(request, 'Surfsite/home.html')
+    return render(request, 'SurfSite/home.html')
 
 class LlangenithListView(ListView):
     model = Post
