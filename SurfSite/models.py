@@ -9,7 +9,6 @@ class Post(models.Model):
     video = models.FileField(upload_to='videos/', blank=True, null=True)
     date_posted = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    placeholder = models.CharField(max_length=100, blank=True, null=True)
     def __str__(self):
         return self.title
 
