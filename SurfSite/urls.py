@@ -20,8 +20,8 @@ urlpatterns = [
     path('caswell/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
 
     path('langland/', LanglandListView.as_view(), name='langland'),
-    path('langland/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
-    path('langland/new/', PostCreateView.as_view(), name='post-create'),
+    path('langland/<int:pk>/', PostDetailView.as_view(), name='langland-post-detail'),
+    path('langland/new/', PostCreateView.as_view(), name='langland-post-create'),
     path('langland/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
     path('langland/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
 
